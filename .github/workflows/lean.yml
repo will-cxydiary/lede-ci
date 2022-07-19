@@ -82,7 +82,6 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-# 针对 LEDE 项目拉取 argon 原作者的源码；部分第三方源自带 argon 主题，使用命令删除； 替换默认主题为 luci-theme-argon
     - name: 自定义配置 ${{matrix.target}}
       env:
         CONFIG_FILE: '${{matrix.target}}.config'
@@ -90,17 +89,14 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x $GITHUB_WORKSPACE/customize.sh && $GITHUB_WORKSPACE/customize.sh
         cd openwrt
-#        cp -f feeds/smpackage/diy/default-settings package/lean/default-settings/files/zzz-default-settings
-#        sed -i 's/v$date1/June/g' package/lean/default-settings/files/zzz-default-settings
         cp -f $GITHUB_WORKSPACE/banner package/base-files/files/etc/banner
         cp -f feeds/smpackage/diy/index_x86.htm package/lean/autocore/files/x86/index.htm
-#        cp -f $GITHUB_WORKSPACE/${{matrix.target}}.config .config && make defconfig
         make defconfig
         find ./ -name luci-theme-argon | xargs rm -rf;
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
         sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
 
-  - name: SSH connection to Actions
+    - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
       if: (github.event.inputs.ssh == 'true' && github.event.inputs.ssh  != 'false') || contains(github.event.action, 'ssh')
       env:
