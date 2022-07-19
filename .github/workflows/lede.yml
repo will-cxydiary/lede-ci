@@ -82,7 +82,7 @@ jobs:
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
-    # 针对 LEDE 项目拉取 argon 原作者的源码；部分第三方源自带 argon 主题，使用命令删除； 替换默认主题为 luci-theme-argon
+# 针对 LEDE 项目拉取 argon 原作者的源码；部分第三方源自带 argon 主题，使用命令删除； 替换默认主题为 luci-theme-argon
     - name: 自定义配置 ${{matrix.target}}
       env:
         CONFIG_FILE: '${{matrix.target}}.config'
