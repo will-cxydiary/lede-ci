@@ -90,7 +90,7 @@ jobs:
         chmod +x $GITHUB_WORKSPACE/customize.sh && $GITHUB_WORKSPACE/customize.sh
         cd openwrt
         cp -f $GITHUB_WORKSPACE/banner package/base-files/files/etc/banner
-        cp -f $GITHUB_WORKSPACE/index_x86.htm package/lean/autocore/files/x86/index.htm
+        cp -f $GITHUB_WORKSPACE/index.htm package/lean/autocore/files/x86/index.htm
         make defconfig
         find ./ -name luci-theme-argon | xargs rm -rf
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
