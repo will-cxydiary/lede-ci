@@ -92,7 +92,7 @@ jobs:
         cp -f $GITHUB_WORKSPACE/banner package/base-files/files/etc/banner
         cp -f feeds/smpackage/diy/index_x86.htm package/lean/autocore/files/x86/index.htm
         make defconfig
-        find ./ -name luci-theme-argon | xargs rm -rf;
+        find ./ -name luci-theme-argon | xargs rm -rf
         git clone -b 18.06 https://github.com/jerrykuku/luci-theme-argon.git package/lean/luci-theme-argon
         sed -i 's/luci-theme-bootstrap/luci-theme-argon/' feeds/luci/collections/luci/Makefile
 
