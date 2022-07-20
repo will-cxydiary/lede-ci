@@ -109,13 +109,6 @@ jobs:
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
 
-
-    - name: 下载包文件
-      working-directory: ./openwrt
-      run: |
-        make download -j$(nproc)
-        find dl -size -1024c -exec rm -f {} \;
-
     - name: 下载包文件
       id: package
       run: |
